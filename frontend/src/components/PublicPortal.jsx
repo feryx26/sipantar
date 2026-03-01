@@ -40,7 +40,7 @@ const PublicPortal = ({ onBack }) => {
   const [loading, setLoading] = useState(true);
 
   // Filters
-  const [searchQuery, setSearchSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedPasar, setSelectedPasar] = useState('');
   const [selectedKategori, setSelectedKategori] = useState('Semua Kategori');
 
@@ -316,7 +316,7 @@ const PublicPortal = ({ onBack }) => {
                     type="text" 
                     placeholder="Nama komoditas..." 
                     value={searchQuery}
-                    onChange={(e) => setSearchSearchQuery(e.target.value)}
+                    onChange={(e) => setSearchQuery(e.target.value)}
                   />
                 </div>
                 <div className="form-group" style={{ flex: 1 }}>
@@ -520,7 +520,7 @@ const PublicPortal = ({ onBack }) => {
                       </tr>
                     </thead>
                     <tbody>
-                      {ketersediaanData.map((item, index) => (
+                      {ketersediaanData && ketersediaanData.map((item, index) => (
                         <tr key={index} style={{ borderBottom: '1px solid #f1f5f9' }}>
                           <td style={{ padding: '16px', fontSize: '14px', fontWeight: '600', color: 'var(--pub-text)' }}>
                             {item.nama_komoditas}
@@ -557,7 +557,7 @@ const PublicPortal = ({ onBack }) => {
                             </span>
                           </td>
                           <td style={{ padding: '16px', textAlign: 'center', fontSize: '12px', color: 'var(--pub-text2)' }}>
-                            {new Date(item.updated_at).toLocaleDateString('id-ID')}
+                            {item.updated_at ? new Date(item.updated_at).toLocaleDateString('id-ID') : '-'}
                           </td>
                         </tr>
                       ))}
@@ -570,19 +570,19 @@ const PublicPortal = ({ onBack }) => {
               <div className="pub-info-grid" style={{ marginTop: '24px' }}>
                 <div className="pub-info-box" style={{ background: '#dcfce7', border: '1px solid #bbf7d0' }}>
                   <div className="pub-info-val" style={{ color: '#166534' }}>
-                    {ketersediaanData.filter(item => item.ketersediaan >= 80).length}
+                    {ketersediaanData ? ketersediaanData.filter(item => item.ketersediaan >= 80).length : 0}
                   </div>
                   <div className="pub-info-lbl" style={{ color: '#166534' }}>Tersedia Normal</div>
                 </div>
                 <div className="pub-info-box" style={{ background: '#fef3c7', border: '1px solid #fde68a' }}>
                   <div className="pub-info-val" style={{ color: '#92400e' }}>
-                    {ketersediaanData.filter(item => item.ketersediaan >= 50 && item.ketersediaan < 80).length}
+                    {ketersediaanData ? ketersediaanData.filter(item => item.ketersediaan >= 50 && item.ketersediaan < 80).length : 0}
                   </div>
                   <div className="pub-info-lbl" style={{ color: '#92400e' }}>Tersedia Terbatas</div>
                 </div>
                 <div className="pub-info-box" style={{ background: '#fee2e2', border: '1px solid #fecaca' }}>
                   <div className="pub-info-val" style={{ color: '#991b1b' }}>
-                    {ketersediaanData.filter(item => item.ketersediaan < 50).length}
+                    {ketersediaanData ? ketersediaanData.filter(item => item.ketersediaan < 50).length : 0}
                   </div>
                   <div className="pub-info-lbl" style={{ color: '#991b1b' }}>Tersedia Langka</div>
                 </div>
