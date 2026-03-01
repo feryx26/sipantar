@@ -10,10 +10,10 @@
       "destination": "/backend/index.js"
     }
   ],
-  "builds": [
-    {
-      "src": "backend/index.js",
-      "use": "@vercel/node"
+  "functions": {
+    "backend/index.js": {
+      "runtime": "vercel-node@latest",
+      "includeFiles": "backend/dist/**"
     }
-  ]
+  }
 }

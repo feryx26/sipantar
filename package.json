@@ -4,9 +4,9 @@
   "description": "SIPANTAR - Sistem Informasi Pantau Harga Pasar",
   "main": "backend/index.js",
   "scripts": {
-    "build": "node -e \"require('child_process').execSync('if exist .buildrc.json (echo Build already running) else (echo 1 > .buildrc.json && cd frontend && npm install && npm run build && cd .. && node -e \\\"const fs=require('fs');!fs.existsSync('backend/dist')&&fs.mkdirSync('backend/dist',{recursive:true});const src='frontend/dist';const dst='backend/dist';fs.rmSync(dst,{recursive:true,force:true});const copy=(s,d)=>{const fs=require('fs'),path=require('path');if(!fs.existsSync(s))return;fs.mkdirSync(d,{recursive:true});fs.readdirSync(s).forEach(f=>{const sp=path.join(s,f),dp=path.join(d,f);fs.lstatSync(sp).isDirectory()?copy(sp,dp):fs.copyFileSync(sp,dp)});};copy(src,dst); && cd backend && npm install && cd .. && rm -f .buildrc.json)\" 2>&1",
+    "build": "node vercel-build.js",
     "start": "cd backend && npm start",
-    "dev": "concurrently \\\"npm run dev-backend\\\" \\\"npm run dev-frontend\\\"",
+    "dev": "concurrently \"npm run dev-backend\" \"npm run dev-frontend\"",
     "dev-backend": "cd backend && npx nodemon index.js",
     "dev-frontend": "cd frontend && npm run dev"
   },
